@@ -1,4 +1,4 @@
-// Mingle WebSocket Signaling Server — Production Ready
+// Mingle WebSocket Signaling Server — Production Ready with explicit upgrade handler
 import { WebSocketServer } from 'ws';
 import http from 'http';
 
@@ -31,8 +31,15 @@ const server = http.createServer((req, res) => {
   }
 });
 
-// WebSocket Server attached directly to HTTP server
-const wss = new WebSocketServer({ server });
+// Explicit WebSocketServer without automatic server listening
+const wss = new WebSocketServer({ noServer: true });
+
+// Handle explicit WebSocket Upgrade request from Render reverse proxy
+server.on('upgrade', (request, socket, head) => {
+  wss.handleUpgrade(request, socket, head, (ws) => {
+    wss.emit('connection', ws, request);
+  });
+});
 
 let waitingQueue = [];
 const activePairs = new Map();   // peerId -> peerId
@@ -44,7 +51,7 @@ function log(...args) {
 
 function safeSend(ws, data) {
   try {
-    if (ws && ws.readyState === 1) { // 1 = OPEN
+    if (ws && ws.readyState === 1) {
       ws.send(JSON.stringify(data));
     }
   } catch (e) {
