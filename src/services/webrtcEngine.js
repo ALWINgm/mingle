@@ -1,9 +1,11 @@
 // WebRTC Real P2P Engine — WebSocket Signaling for Mingle
 // Connects real users across different browsers/devices
 
-// Auto-detect: use env variable, or fall back to wss:// in production
+const DEFAULT_PROD_WS = 'wss://mingle-server-q4q0.onrender.com';
 const SIGNALING_SERVER = import.meta.env.VITE_SIGNALING_SERVER ||
-  (location.protocol === 'https:' ? 'wss://' : 'ws://') + location.hostname + ':4000';
+  (location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+    ? 'ws://localhost:4000'
+    : DEFAULT_PROD_WS);
 
 const ICE_SERVERS = {
   iceServers: [
