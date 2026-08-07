@@ -427,7 +427,7 @@ function log(...args) {
 // ─────────────────────────────────────────────
 // Start
 // ─────────────────────────────────────────────
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   log(`✅ Mingle Secure Signaling Server → ws://localhost:${PORT}`);
   log(`🛡️  Security: Rate limit ${SECURITY.MESSAGE_RATE_LIMIT} msg/${SECURITY.MESSAGE_RATE_WINDOW_MS/1000}s | Max ${SECURITY.MAX_CONNECTIONS_PER_IP} conn/IP | Heartbeat ${SECURITY.HEARTBEAT_INTERVAL_MS/1000}s`);
   log(`📋 Health check: http://localhost:${PORT}/health`);
