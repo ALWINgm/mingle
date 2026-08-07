@@ -259,7 +259,7 @@ export default function VideoGrid({
       </div>
 
       {/* ── LOCAL SELF-VIEW (PiP) ── */}
-      <div style={{
+      <div className="pip-self-video" style={{
         position: 'absolute', bottom: '20px', right: '20px',
         width: '220px', height: '160px',
         borderRadius: 'var(--radius-md)', overflow: 'hidden',

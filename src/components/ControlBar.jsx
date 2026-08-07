@@ -37,7 +37,7 @@ export default function ControlBar({
   const isIdle = connectionState === 'idle' || connectionState === 'peer_left' || connectionState === 'server_disconnected';
 
   return (
-    <div className="glass-panel" style={{
+    <div className="glass-panel mobile-control-bar" style={{
       padding: '14px 24px',
       display: 'flex',
       alignItems: 'center',

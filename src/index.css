@@ -307,3 +307,47 @@ h1, h2, h3, h4, .font-heading {
   border-radius: 2px;
   transition: height 0.08s ease;
 }
+
+/* 📱 MOBILE RESPONSIVE OPTIMIZATIONS (< 768px) */
+@media (max-width: 768px) {
+  body {
+    overflow: hidden;
+  }
+
+  .emoji-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.4rem;
+  }
+
+  .floating-reaction {
+    font-size: 2.2rem;
+  }
+
+  /* Self Video PiP Adjustment on mobile */
+  .pip-self-video {
+    width: 105px !important;
+    height: 135px !important;
+    top: 16px !important;
+    right: 14px !important;
+    bottom: auto !important;
+    border-radius: 12px !important;
+  }
+
+  /* Control bar full width at bottom */
+  .mobile-control-bar {
+    padding: 8px 12px !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+  }
+
+  /* Header compact spacing */
+  header {
+    padding: 8px 12px !important;
+    margin: 0 0 6px 0 !important;
+    border-radius: 0 !important;
+  }
+}
