@@ -78,10 +78,16 @@ const wss = new WebSocketServer({
       return done(false, 403, 'Banned');
     }
 
-    // Check origin (allow null/empty for non-browser clients in dev)
-    if (origin && !SECURITY.ALLOWED_ORIGINS.includes(origin)) {
-      log(`🚫 Blocked unknown origin: ${origin}`);
-      return done(false, 403, 'Forbidden origin');
+    // Check origin (allow localhost, vercel apps, or configured origins)
+    if (origin && SECURITY.ALLOWED_ORIGINS.length > 0 && !SECURITY.ALLOWED_ORIGINS.includes('*')) {
+      const isAllowed = SECURITY.ALLOWED_ORIGINS.includes(origin) ||
+                        origin.endsWith('.vercel.app') ||
+                        origin.includes('localhost') ||
+                        origin.includes('127.0.0.1');
+      if (!isAllowed) {
+        log(`🚫 Blocked unknown origin: ${origin}`);
+        return done(false, 403, 'Forbidden origin');
+      }
     }
 
     // Check per-IP connection limit
