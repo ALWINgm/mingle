@@ -1,0 +1,15 @@
+# Render.com deployment config for Mingle Signaling Server
+services:
+  - type: web
+    name: mingle-server
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ALLOWED_ORIGINS
+        sync: false   # set manually in Render dashboard to your Vercel URL
+    healthCheckPath: /health
+    autoDeploy: true
